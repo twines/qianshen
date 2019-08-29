@@ -10,14 +10,12 @@ import (
 var jwtSecret = []byte(setting.AppSetting.JwtSecret)
 
 type Claims struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	ID       uint   `json:"id"`
+	User interface{}
 	jwt.StandardClaims
 }
 
 // GenerateToken generate tokens used for auth
-func GenerateToken(username, password string, id uint, issuer ...string) (map[string]string, error) {
+func GenerateToken(user interface{}, issuer ...string) (map[string]string, error) {
 	nowTime := time.Now()
 	expireTime := nowTime.Add(30 * 24 * time.Hour)
 	s := ""
@@ -25,9 +23,7 @@ func GenerateToken(username, password string, id uint, issuer ...string) (map[st
 		s += strings.ToUpper(issuer[0])
 	}
 	claims := Claims{
-		username,
-		EncodeMD5(password),
-		id,
+		user,
 		jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 			Issuer:    s,

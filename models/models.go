@@ -33,10 +33,6 @@ func Setup() {
 	if err != nil {
 		log.Fatalf("models.Setup err: %v", err)
 	}
-
-	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
-		return setting.DatabaseSetting.TablePrefix + defaultTableName
-	}
 	if setting.ServerSetting.RunMode == "debug" {
 		db.LogMode(true)
 	}
