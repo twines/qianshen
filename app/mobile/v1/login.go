@@ -6,6 +6,7 @@
 package mobileV1
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"qianshen/models"
 	"qianshen/pkg/response"
@@ -25,7 +26,8 @@ func Login(c *gin.Context) {
 		c.JSON(200, response.Error("用户不存在"))
 	} else {
 		if md := util.EncodeMD5(c.PostForm("password")); md != user.Password {
-			c.JSON(200, response.Error("用户不存在"))
+			fmt.Println(md)
+			c.JSON(200, response.Error("用户名或者密码错误"))
 		} else {
 			if token, err := util.GenerateToken(user, "mobile"); err == nil {
 				c.JSON(200, response.Success(token))

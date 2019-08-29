@@ -10,6 +10,7 @@ func Success(data interface{}, msg ...string) map[string]interface{} {
 	if len(msg) > 0 {
 		message = msg[0]
 	}
+
 	return map[string]interface{}{"code": 0, "status": "success", "msg": message, "data": data}
 }
 func Error(msg string, code ...int) map[string]interface{} {
