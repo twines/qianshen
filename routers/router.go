@@ -3,7 +3,7 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 	"qianshen/app/admin/v1"
-	mobileV1 "qianshen/app/mobile/v1"
+	"qianshen/app/mobile/v1"
 	"qianshen/app/web/v1"
 	"qianshen/middleware/cors"
 	"qianshen/middleware/jwt"
