@@ -13,5 +13,7 @@ import (
 func Index(c *gin.Context) {
 	if user, ok := c.Get("user"); ok {
 		c.JSON(200, response.Success(user))
+	} else {
+		c.JSON(200, response.Error("aaaaaaaaa"))
 	}
 }

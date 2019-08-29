@@ -15,14 +15,15 @@ func Web() gin.HandlerFunc {
 			if user, err := util.ParseToken(token[1]); err == nil {
 				if strings.ToUpper(token[0]) != user.Issuer {
 					c.JSON(200, response.Error("token error", 4001))
+				} else {
+					c.Set("user", user.User)
+					c.Next()
 				}
-				c.Set("user", user.User)
 			} else {
 				c.JSON(200, response.Error("token error", 4001))
 			}
-			c.Next()
 		}
-
+		c.Abort()
 	}
 }
 func Mobile() gin.HandlerFunc {
@@ -33,14 +34,15 @@ func Mobile() gin.HandlerFunc {
 			if user, err := util.ParseToken(token[1]); err == nil {
 				if strings.ToUpper(token[0]) != user.Issuer {
 					c.JSON(200, response.Error("token error", 4001))
+				} else {
+					c.Set("user", user.User)
+					c.Next()
 				}
-				c.Set("user", user.User)
 			} else {
 				c.JSON(200, response.Error("token error", 4001))
 			}
-			c.Next()
 		}
-
+		c.Abort()
 	}
 }
 func Admin() gin.HandlerFunc {
@@ -51,13 +53,15 @@ func Admin() gin.HandlerFunc {
 			if admin, err := util.ParseToken(token[1]); err == nil {
 				if strings.ToUpper(token[0]) != admin.Issuer {
 					c.JSON(200, response.Error("issuer error", 4001))
+				} else {
+					c.Set("admin", admin.User)
+					c.Next()
 				}
-				c.Set("admin", admin.User)
 			} else {
 				c.JSON(200, response.Error("token error", 4001))
 			}
-			c.Next()
 		}
+		c.Abort()
 	}
 }
 func Api() gin.HandlerFunc {
@@ -68,13 +72,15 @@ func Api() gin.HandlerFunc {
 			if user, err := util.ParseToken(token[1]); err == nil {
 				if strings.ToUpper(token[0]) != user.Issuer {
 					c.JSON(200, response.Error("token error", 4001))
+				} else {
+					c.Set("user", user)
+					c.Next()
 				}
-				c.Set("user", user)
 			} else {
 				c.JSON(200, response.Error("token error", 4001))
 			}
-			c.Next()
 		}
+		c.Abort()
 	}
 }
 func parseToken(token string) []string {

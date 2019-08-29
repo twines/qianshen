@@ -38,6 +38,7 @@ func InitRouter() *gin.Engine {
 		webGroup := r.Group("/")
 		webApi := webGroup.Group("/web/api/v1")
 		webApi.GET("/login", webV1.Login)
+		webApi.Use(jwt.Web())
 		{
 			webApi.GET("/index", webV1.Index)
 		}
