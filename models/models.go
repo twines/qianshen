@@ -6,15 +6,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
 	"qianshen/pkg/setting"
-	"time"
 )
-
-type Model struct {
-	ID        uint      `gorm:"primary_key"`
-	DeletedAt time.Time `json:"deletedAt" gorm:"deleted_at" sql:"index"`
-	CreatedAt time.Time `json:"createdAt" gorm:"created_at"`
-	UpdatedAt time.Time `json:"updatedAt" gorm:"updated_at"`
-}
 
 var (
 	db *gorm.DB
