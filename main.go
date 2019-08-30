@@ -6,7 +6,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -16,7 +15,6 @@ import (
 	"qianshen/models"
 	"qianshen/pkg/setting"
 	"qianshen/routers"
-	"time"
 )
 
 func init() {
@@ -47,11 +45,11 @@ func main() {
 
 	log.Println("Shutdown Server ...")
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	if err := s.Shutdown(ctx); err != nil {
-		log.Fatal("Server Shutdown:", err)
-	}
+	//ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	//defer cancel()
+	//if err := s.Shutdown(ctx); err != nil {
+	//	log.Fatal("Server Shutdown:", err)
+	//}
 
 	log.Println("Server exiting")
 }
